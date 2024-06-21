@@ -61,8 +61,8 @@ class ExpenseData
     result = @connection.exec <<~SQL
       SELECT COUNT(*)
         FROM information_schema.tables
-        WHERE table_schema = 'public'
-          AND table_name = 'expenses';
+       WHERE table_schema = 'public'
+         AND table_name = 'expenses';
     SQL
     
     if result[0]['count'] == '0'
