@@ -68,10 +68,10 @@ class ExpenseData
     if result[0]['count'] == '0'
       @connection.exec <<~SQL
         CREATE TABLE expense (
-                id serial PRIMARY KEY,
-                amount numeric(6, 2) NOT NULL CHECK (amount >= 0.01),
-                memo text NOT NULL,
-                created_on date NOT NULL
+               id serial PRIMARY KEY,
+               amount numeric(6, 2) NOT NULL CHECK (amount >= 0.01),
+               memo text NOT NULL,
+               created_on date NOT NULL
         );
       SQL
     end
