@@ -1,0 +1,22 @@
+<html lang='en-US'>
+  <head>
+    <title><%= @tab %></title>
+  </head>
+
+  <body>
+    <header>
+      <ul>
+        <li><a href='/home'>Home</a></li>
+        <li><a href='/customers/lookup'>Customers</a></li>
+        <li><a href='/workorders'>Workorders</a></li>
+        <li><a href='/pricing'>Pricing</a></li>
+      </ul>
+
+    <h1>Sprocket Change</h1>
+
+    </header>
+
+    <main><%= yield %></main>
+
+  </body>
+</html>
