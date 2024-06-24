@@ -26,7 +26,7 @@ get '/home' do
   erb :home
 end
 
-get '/customer_lookup' do
+get '/customers/lookup' do
   erb :customer_lookup
 end
 
@@ -37,6 +37,8 @@ end
 get '/pricing' do
   'Pricing to come...'
 end
+
+post '/customers/lookup'
 
 
 
