@@ -70,6 +70,14 @@
           <td>$<%= service['price'] %></td>
         </tr>
       <% end %>
+      <tr>
+        <td>Tax</td>
+        <td>$<%= format_money(@tax) %></td>
+      </tr>
+      <tr>
+        <th>Total</th>
+        <td>$<%= format_money(@sum + @tax) %></td>
+      </tr>
     </tbody>
   </table>
 <% end %>

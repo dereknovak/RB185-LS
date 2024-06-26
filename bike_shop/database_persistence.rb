@@ -163,6 +163,16 @@ class DatabasePersistence
     query(sql, params['workorder_number'], params['service'])
   end
 
+  def service_total(workorder_number)
+    sql = <<~SQL
+      SELECT SUM(price) FROM services
+      JOIN workorder_services ON service_id = services.id
+      WHERE workorder_id = $1;
+    SQL
+
+    query(sql, workorder_number).first['sum']
+  end
+
   def load_last_workorder
     sql = <<~SQL
       SELECT id FROM workorders

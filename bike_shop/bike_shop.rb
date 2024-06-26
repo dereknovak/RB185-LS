@@ -14,6 +14,16 @@ configure(:development) do
   also_reload 'database_persistence.rb'
 end
 
+helpers do
+  def generate_tax(num)
+    (num * 0.0825).round(2)
+  end
+
+  def format_money(amount)
+    format('%.2f', amount)
+  end
+end
+
 before do
   @storage = DatabasePersistence.new(logger)
 end
@@ -62,6 +72,8 @@ get '/workorders/:workorder_number' do
   @bicycle = @storage.load_bicycle_info(params[:workorder_number])
   @workorder = @storage.load_workorder_info(params[:workorder_number])
   @services = @storage.load_services(params[:workorder_number])
+  @sum = @storage.service_total(@workorder['id']).to_i
+  @tax = generate_tax(@sum)
 
   erb :workorder
 end
