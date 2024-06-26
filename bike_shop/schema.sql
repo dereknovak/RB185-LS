@@ -10,7 +10,9 @@ CREATE TABLE customers (
   first_name varchar(25) NOT NULL,
   last_name varchar(25) NOT NULL,
   phone_number char(10) CHECK (length(phone_number) = 10),
-  email_address varchar(25) CHECK (email_address LIKE '%@%')
+  email_address varchar(25) CHECK (email_address LIKE '%@%'),
+  UNIQUE (first_name, last_name, phone_number),
+  UNIQUE (first_name, last_name, email_address)
 );
 
 CREATE TABLE bicycles (
@@ -19,8 +21,9 @@ CREATE TABLE bicycles (
   make varchar(25) NOT NULL,
   model varchar(25) NOT NULL,
   color varchar(25) NOT NULL,
-  customer_id int NOT NULL REFERENCES customers (id)
+  customer_id int NOT NULL REFERENCES customers (id) ON DELETE CASCADE
 );
+
 
 CREATE TABLE workorders (
   id serial PRIMARY KEY,
@@ -38,7 +41,7 @@ CREATE TABLE workorder_services (
 
 
 INSERT INTO services (name, price, description)
-VALUES ('Flat Fix', 10, 'Replace tube for either front or rear tire')
+VALUES ('Flat Fix', 10, 'Replace tube for either front or rear tire'),
        ('Tune', 140, 'Full service package that includes adjustments and cleaning'),
        ('Frame and Wheel Clean', 20, 'Full detail of bicycle frame and wheels'),
        ('Adjust Derailleur', 20, 'Index and set limits for either front or rear derailleur'),
@@ -51,7 +54,8 @@ VALUES ('Flat Fix', 10, 'Replace tube for either front or rear tire')
 INSERT INTO customers (first_name, last_name, phone_number, email_address)
 VALUES ('Derek', 'Novak', '2543718698', 'derek.novak1@gmail.com'),
        ('Derek', 'Jeter', '1234567890', 'derek.jeter@yahoo.com'),
-       ('John', 'Doe', '8647953461', 'john_doe23@aol.com');
+       ('John', 'Doe', '8647953461', 'john_doe23@aol.com'),
+       ('Jimmy', 'Neutron', '4693713578', 'james_neutron@msn.com');
 
 INSERT INTO bicycles (serial_number, make, model, color, customer_id)
 VALUES ('WTU123456', 'Cannondale', 'Synapse', 'Maroon', 1),

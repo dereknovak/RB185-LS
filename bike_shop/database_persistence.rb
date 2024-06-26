@@ -130,6 +130,9 @@ class DatabasePersistence
                params['last_name'],
                params['phone_number'],
                params['email_address'])
+
+  rescue PG::UniqueViolation
+    return
   end
 
   def add_bicycle(params)
@@ -161,6 +164,9 @@ class DatabasePersistence
     SQL
 
     query(sql, params['workorder_number'], params['service'])
+
+  rescue PG::NotNullViolation
+    return
   end
 
   def service_total(workorder_number)

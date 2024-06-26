@@ -1,6 +1,9 @@
 <html lang='en-US'>
   <head>
     <title><%= @tab %></title>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='/stylesheets/reset.css'>
+    <link rel='stylesheet' href='/stylesheets/application.css'>
   </head>
 
   <body>
@@ -13,6 +16,10 @@
       </ul>
 
     <h1>Sprocket Change</h1>
+
+    <% if session[:message] %>
+      <p>***<%= session.delete(:message) %>***</p>
+    <% end %>
 
     </header>
 
