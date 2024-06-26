@@ -1,0 +1,80 @@
+<h2><%= "#{@customer['first_name']} #{@customer['last_name']}" %></h2>
+
+<h3>Customer Info</h3>
+<dl>
+  <dt>Member Number</dt>
+  <dd><%= @customer['id'] %></dd>
+
+  <dt>First Name</dt>
+  <dd><%= @customer['first_name'] %></dd>
+
+  <dt>Last Name</dt>
+  <dd><%= @customer['last_name'] %></dd>
+
+  <dt>Phone Number</dt>
+  <dd><%= @customer['phone_number'] %></dd>
+
+  <dt>Email Address</dt>
+  <dd><%= @customer['email_address'] %></dd>
+</dl>
+
+<h3>Customer Equipment</h3>
+
+<% if @bicycles.values.empty? %>
+  <p>No bicycles have been added to customer's profile.</p>
+<% else %>
+  <table>
+    <thead>
+      <th>Serial Number</th>
+      <th>Make</th>
+      <th>Model</th>
+      <th>Color</th>
+    </thead>
+
+    <tbody>
+      <% @bicycles.each do |bicycle| %>
+        <tr>
+          <td><%= bicycle['serial_number'] %></td>
+          <td><%= bicycle['make'] %></td>
+          <td><%= bicycle['model'] %></td>
+          <td><%= bicycle['color'] %></td>
+          <td>
+            <form method='post' action='/workorders/new/<%= bicycle['id'] %>'>
+              <button type='submit'>New Service</button>
+            </form>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<form method='get' action='/customers/<%= @customer['id'] %>/bicycles/add'>
+  <button type='submit'>Add New Bicycle</button>
+</form>
+
+<h3>Customer Work Orders</h3>
+
+<% if @workorders.values.empty? %>
+  <p>No workorders have been added to customer's profile.</p>
+<% else %>
+  <table>
+    <thead>
+      <th>Work Order Number</th>
+      <th>Bicycle</th>
+      <th>Date Started</th>
+    </thead>
+
+    <tbody>
+      <% @workorders.each do |workorder| %>
+        <tr>
+          <td>
+            <a href='/workorders/<%= workorder['id'] %>'>
+              <%= workorder['id'] %>
+            </a>
+          </td>
+          <td><%= workorder['bicycle'] %></td>
+          <td><%= workorder['start_date'] %></td>
+        </tr>
+    <% end %>
+  </table>
+<% end %>

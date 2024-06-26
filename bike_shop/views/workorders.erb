@@ -1,0 +1,37 @@
+<h2>Work Orders</h2>
+
+<% if @workorders.values.empty? %>
+  <p>No workorders have been created</p>
+<% else %>
+  <table>
+    <thead>
+      <th>Completed</th>
+      <th>Work Order Number</th>
+      <th>Bicycle</th>
+      <th>Customer</th>
+      <th>Date Started</th>
+    </thead>
+
+    <tbody>
+      <% @workorders.each do |workorder| %>
+        <tr>
+          <td>
+            <% if workorder['completed'] == 't' %>
+              Yes
+            <% else %>
+              No
+            <% end %>
+          </td>
+          <td>
+            <a href='/workorders/<%= workorder['id'] %>'>
+              <%= workorder['id'] %>
+            </a>
+          </td>
+          <td><%= workorder['bicycle_name'] %></td>
+          <td><%= workorder['full_name'] %></td>
+          <td><%= workorder['start_date'] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

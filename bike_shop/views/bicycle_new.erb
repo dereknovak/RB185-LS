@@ -1,0 +1,24 @@
+<form method='post' action='/customers/<%= params[:customer_id] %>/bicycles/add'>
+    <label for='serial_number'>
+    Serial Number *
+    <input type='text' name='serial_number' id='serial_number' required>
+  </label>
+
+  <label for='make'>
+    Make *
+    <input type='text' name='make' id='make' required>
+  </label>
+
+  <label for='model'>
+    Model *
+    <input type='text' name='model', id='model' required>
+  </label>
+
+  <label for='color'>
+    Color *
+    <input type='text' name='color' id='color' required>
+  </label>
+
+  <button type='submit'>Add</button>
+  <button type='reset'>Reset</button>
+</form>

@@ -1,0 +1,83 @@
+<h2>Work Order No. <%= @workorder['id'] %></h2>
+
+<h3>Customer Info</h3>
+<dl>
+  <dt>Member Number</dt>
+  <dd><%= @customer['id'] %></dd>
+
+  <dt>First Name</dt>
+  <dd><%= @customer['first_name'] %></dd>
+
+  <dt>Last Name</dt>
+  <dd><%= @customer['last_name'] %></dd>
+
+  <dt>Phone Number</dt>
+  <dd><%= @customer['phone_number'] %></dd>
+
+  <dt>Email Address</dt>
+  <dd><%= @customer['email_address'] %></dd>
+</dl>
+
+<form method='get' action='/customers/<%= @customer['id'] %>'>
+  <button type='submit'>Customer Profile</button>
+</form>
+
+<h3>Bicycle Info</h3>
+<dl>
+  <dt>Serial Number</dt>
+  <dd><%= @bicycle['serial_number'] %></dd>
+
+  <dt>Make</dt>
+  <dd><%= @bicycle['make'] %></dd>
+
+  <dt>Model</dt>
+  <dd><%= @bicycle['model'] %></dd>
+
+  <dt>Color</dt>
+  <dd><%= @bicycle['color'] %></dd>
+</dl>
+
+<h3>Services</h3>
+<form method='post' action='/workorders/<%= @workorder['id'] %>/services/add'>
+  <select name='service' id='service'>
+    <option disabled selected>Choose one</option>
+    <option value='1'>Fix Flat</option>
+    <option value='2'>Tune</option>
+    <option value='3'>Frame and Wheel Clean</option>
+    <option value='4'>Adjust Derailleur</option>
+    <option value='5'>Adjust Brake</option>
+    <option value='6'>Install Chain</option>
+    <option value='7'>Overhaul Fork</option>
+    <option value='8'>Tubeless Conversion</option>
+  </select>
+
+  <button type='submit'>Add Service</button>
+</form>
+
+<% if @services.values.empty? %>
+  <p>No services have been added to the work order.</p>
+<% else %>
+  <table>
+    <thead>
+      <th>Service</th>
+      <th>Price</th>
+    </thead>
+
+    <tbody>
+      <% @services.each do |service| %>
+        <tr>
+          <td><%= service['name'] %></td>
+          <td>$<%= service['price'] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if @workorder['completed'] == 't' %>
+  <p>Completed</p>
+<% else %>
+  <form method='post' action='/workorders/<%= @workorder['id'] %>/complete'>
+    <button type='submit'>Complete Work Order</button>
+  </form>
+<% end %>

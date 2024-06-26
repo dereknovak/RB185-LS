@@ -1,0 +1,19 @@
+<h2>Shop Services</h2>
+
+<table>
+  <thead>
+    <th>Service</th>
+    <th>Price</th>
+    <th>Description</th>
+  </thead>
+
+  <tbody>
+    <% @services.each do |service| %>
+      <tr>
+        <td><%= service['name'] %></td>
+        <td>$<%= service['price'] %></td>
+        <td><%= service['description'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
